@@ -1,0 +1,39 @@
+﻿<div class="jss6">
+	<div class="jss5 jss287" aria-label="Notification">
+
+<!-- Здесь меняем ссылку на звук оповещения -->
+<audio id="snd" src="https://wow.zamimg.com/wowsounds/567396"></audio>	
+<!-- -------------------------------------- -->
+
+		<p class="jss126 jss134 jss159">
+			<span id="sndstat" style="opacity: 0.2" onclick="
+				if(document.getElementById('sndstat').innerHTML == 'Sound off'){
+						document.getElementById('sndstat').innerHTML = 'Sound on';
+						var target = document.getElementsByClassName('_scrollable-div_1dj6m_1')[0];
+						var observer = new MutationObserver(function(mutations) {
+							mutations.forEach(function(mutation) {
+								document.getElementById('snd').play();																
+							});    
+						});
+						var config = { attributes: true, childList: true, characterData: true }	
+						observer.observe(target, config);
+						document.getElementById('snd').muted = false;
+						document.getElementById('sndstat').style.opacity=0.2+document.getElementById('snd').volume;
+						document.getElementById('vlma').style.display='block';
+						document.getElementById('vlmb').style.display='block';
+				}else if(document.getElementById('sndstat').innerHTML == 'Sound on'){
+						document.getElementById('sndstat').innerHTML = 'Sound off';
+						document.getElementById('snd').muted = true;
+						document.getElementById('sndstat').style.opacity=0.2;
+						document.getElementById('vlma').style.display='none';
+						document.getElementById('vlmb').style.display='none';
+				};			
+			">Sound off</span>
+		</p>				
+		<p class="jss320" id="vlma" style="display: none;"></p>
+		<p class="jss126 jss134 jss159" id="vlmb" style="display: none;">
+			<span onclick="document.getElementById('snd').volume += 0.1;document.getElementById('sndstat').style.opacity=0.2+document.getElementById('snd').volume;console.log(document.getElementById('snd').volume);">+</span>
+			<span onclick="document.getElementById('snd').volume -= 0.1;document.getElementById('sndstat').style.opacity=0.2+document.getElementById('snd').volume;console.log(document.getElementById('snd').volume);">-</span>
+		</p>		
+	</div>
+</div>
